@@ -9,7 +9,8 @@
   "author": "Naman Mittal",
   "license": "ISC",
   "dependencies": {
-    "socket.io": "*",
-    "express": "*"
+    "express": "*",
+    "onesignal-emoji-picker": "^1.0.0",
+    "socket.io": "*"
   }
 }
