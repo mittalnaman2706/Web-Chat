@@ -1,8 +1,8 @@
 # Web-Chat
 
-* RealtimeWeb-Chat application.
+* Realtime Web-Chat application.
 * Built with Node.js and socket.io library.
 
 **Screenshot** 
 
-![](./Screenshot.PNG)
+![](./Screenshot.png)

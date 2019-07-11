@@ -1,6 +1,7 @@
 <html>
+
 <head>
-	<title>IO Chat</title>
+	<title>Chat App</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
@@ -16,6 +17,7 @@
 		}
 	</style> 
 </head>
+
 <body>
 	<div class="container">
 
@@ -82,11 +84,13 @@
 			});
 
 			socket.on('new message', function(data){
-				$chat.append('<div class="well"><b>' + data.user + '</b>:  '+data.msg+'</div>');
+				$chat.append('<div class="well"><b>' + data.user + '</b>:  '+data.msg+'									<span id="datetime"></span></div>');
 			});
 
+			// <p>Date/Time: <span id="datetime"></span></p>
+
 			socket.on('new person', function(data){
-				$chat.append('<div> <h4 style="color:red;">'+ data.name + ' joined the chat</h4></div>');
+				$chat.append('<div> <h4 style="color:#30F530;">'+ data.name + ' joined the chat</h4></div>');
 			});
 
 			socket.on('delete user', function(data){
@@ -94,8 +98,8 @@
 			});
 
 			$userForm.submit(function(e){
-				e.preventDefault();
 
+				e.preventDefault();
 				socket.emit('new user', $username.val(), function(data){
 
 			    // io.sockets.emit('userjoinedthechat', data +" : has joined the chat ");
@@ -108,14 +112,6 @@
 				$username.val('');
 			});
 
-			// socket.on('join', function(userNickname) {
-
-			//     user = userNickname;
-			//     users.push(userNickname);
-			//     io.sockets.emit('userjoinedthechat', userNickname +" : has joined the chat ");
-			//     console.log("User list: ", users);
-			// });
-
 			socket.on('get_users', function(data){
 
 				console.log(data.length);
@@ -126,16 +122,13 @@
 				$users.html(html);
 			});
 
-			// socket.on('join_user', function(data){
-
-			// 	console.log(data + " joined");
-			// 	var html = '';
-			// 	html += data + " has joined the chat!";
-			// 	$join.html(html);
-			// });
+			var dt = new Date();
+			
+			document.getElementById("datetime").innerHTML = (("0"+dt.getDate()).slice(-2)) +"."+ (("0"+(dt.getMonth()+1)).slice(-2)) +"."+ (dt.getFullYear()) +" "+ (("0"+dt.getHours()).slice(-2)) +":"+ (("0"+dt.getMinutes()).slice(-2));
 
 
 		});
 	</script>
+
 </body>
 </html> 

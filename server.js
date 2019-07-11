@@ -42,19 +42,20 @@ io.sockets.on('connection', function(socket){
 
 		socket.username = data;
 		users.push(data);
-		updateUsernames();
 
+		updateUsernames();
+		joinUser(data);
 		// name = data;
 		// console.log('a');
-		io.sockets.emit('new person', {name: data});
 	});
 
 	function updateUsernames(){
 		io.sockets.emit('get_users', users);
 	}
 
-	// function joinUser(u){
-	// }
+	function joinUser(data){
+		io.sockets.emit('new person', {name: data});
+	}
 });
 
 server.listen(3000);
